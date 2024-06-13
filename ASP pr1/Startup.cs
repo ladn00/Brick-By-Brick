@@ -34,8 +34,9 @@ namespace ASP_pr1
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders().AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddTransient<Controllers.HomeController>();
             services.AddMemoryCache();
+
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddHttpContextAccessor();
             services.AddSession(Options =>

@@ -27,52 +27,23 @@ namespace ASP_pr1
         public async Task Execute(string email, string subject, string body)
         {
 
-            /* MailjetClient client = new MailjetClient("****************************1234", "****************************abcd")
-             {
-                 Version = ApiVersion.V3_1,
-             };
-             MailjetRequest request = new MailjetRequest
-             {
-                 Resource = Send.Resource,
-             }
-              .Property(Send.Messages, new JArray {
-      new JObject {
-       {
-        "From",
-        new JObject {
-         {"Email", "andrej.zuev.2918@gmail.com"},
-         {"Name", "Андрей"}
-        }
-       }, {
-        "To",
-        new JArray {
-         new JObject {
-          {
-           "Email",
-           "andrej.zuev.2918@gmail.com"
-          }, {
-           "Name",
-           "Андрей"
-          }
-         }
-        }
-       }, {
-        "Subject",
-        "Greetings from Mailjet."
-       }, {
-        "TextPart",
-        "My first Mailjet email"
-       }, {
-        "HTMLPart",
-        "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!"
-       }, {
-        "CustomID",
-        "AppGettingStartedTest"
-       }
-      }
-              });
-             MailjetResponse response = await client.PostAsync(request);
-         */
+            MailjetClient client = new MailjetClient("f177a5b80993006a117bb4b6cb460f33", "bcba69967e9a6c88329e26f06bdd67df");
+
+            MailjetRequest request = new MailjetRequest
+            {
+                Resource = Send.Resource
+            };
+
+            // construct your email with builder
+            var emailBuilder = new TransactionalEmailBuilder()
+                   .WithFrom(new SendContact("andrej.zuev.2918@gmail.com"))
+                   .WithSubject(subject)
+                   .WithHtmlPart(body)
+                   .WithTo(new SendContact(email))
+                   .Build();
+
+            // invoke API to send email
+            var response = await client.SendTransactionalEmailAsync(emailBuilder);
         }
     }
 }
