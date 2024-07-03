@@ -1,5 +1,5 @@
 # Brick By Brick
-Web-API Строительного магазина с использованием  ASP.Net Core, Identity, MSSQL, code-first model, кэширования, Bootstrap, fontawesome.
+Web-приложение Строительного магазина с использованием  ASP.Net Core, Identity, MSSQL, code-first model, кэширования, Bootstrap, fontawesome.
 
 # Реализованный функционал:
   - авторизация;
